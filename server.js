@@ -7,12 +7,6 @@ var PORT = 3000;
 var reservation = ["foo", "foo2"];
 var waitlist = ["foo3", "foo4"]
 
-function checkReservation (obj) {
-  if (reservation.length < 6) {
-    reservation.push(obj);
-  }
-}
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -44,3 +38,17 @@ app.get("/api/waitlist", function(req, res) {
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
+
+app.post("/reservations", function(req, res){
+  var newReservation = req.body;
+  
+  if (reservation.length < 5) {
+    reservation.push(newReservation)
+    console.log("added to the table!")
+    return res.json(reservation)
+  } else {
+    waitlist.push(newReservation)
+    console.log("added to waitlist!")
+    return res.json(waitlist)
+  }
+})
