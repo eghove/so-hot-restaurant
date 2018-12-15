@@ -18,8 +18,8 @@
             <h2 class="text-center">Make your reservation</h2>
             <br>
             <div class="text-center">
-                <a href="/tables.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">View Tables</a>
-                <a href="/home.html" class="btn btn-danger btn-lg" role="button" aria-pressed="true">Home</a>
+                <a href="/tables" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">View Tables</a>
+                <a href="/" class="btn btn-danger btn-lg" role="button" aria-pressed="true">Home</a>
             </div>
         </div>
         <!-- Reservation -->
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -57,5 +57,29 @@
             </div>
         </div>
     </div>
+
+    
+    
+    <script type="text/javascript">
+    
+    $("#submit").on("click", function(event) {
+        event.preventDefault();
+        var newReservation = {
+            name: $("#name").val().trim(),
+            phoneNumber: $("#phoneNumber").val().trim(),
+            email: $("#email").val().trim(),
+            uniqueID: $("#uniqueID").val().trim(),
+        };
+
+        $.post("/reservations", newReservation)
+        .then(function(data) {
+            alert("Reservation made!")
+        })
+
+    })
+
+</script>
+    
+
 </body>
 </html>
