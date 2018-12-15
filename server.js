@@ -17,28 +17,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", function(req, res) {
-  
-    var myHTML = "<html>" +
-      "<body><h1>Home Page</h1>" +
-      "<p>foo</p>" +
-      "</body></html>";
-    // Configure the response to return a status code of 200 (meaning everything went OK), and to be an HTML document
-    res.writeHead(200, { "Content-Type": "text/html" });
-  
-    // End the response by sending the client the myHTML string (which gets rendered as an HTML document thanks to the code above)
-    res.end(myHTML);
-  });
+  console.log("home page")
+  res.sendFile(path.join(__dirname, "/html/home.html"));
+})
 
 
   app.get("/reservations", function(req, res){
     console.log("reservations page")
-    res.writeHead(200, { "Content-Type": "text/html" });
+    res.sendFile(path.join(__dirname, "/html/reservation.html"));
 })
 
 
 app.get("/tables", function(req, res){
     console.log("tables page")
-    res.sendFile(path.join(__dirname, "tables.html"));
+    res.sendFile(path.join(__dirname, "/html/tables.html"));
 })
 
 app.get("/api/tables", function(req, res) {
